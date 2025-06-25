@@ -1,0 +1,13 @@
+<h2>Add Ingredient to <%= @cocktail.name %></h2>
+
+<%= simple_form_for [@cocktail, @dose] do |f| %>
+  <%= f.input :ingredient_id,
+              collection: Ingredient.all,
+              label: "Choose Ingredient",
+              prompt: "Select one" %>
+
+  <%= f.input :description %>
+
+  <%= f.button :submit, "Add Dose" %>
+<% end %>
+<%= link_to "Back", cocktails_path %>
