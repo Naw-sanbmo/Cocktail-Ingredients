@@ -1,0 +1,15 @@
+body {
+  font-family: "Kaushan Script", cursive;
+  font-size: large;
+  font-weight: 300;
+  font-style: normal;
+  color:white;
+}
+.with-background {
+  background-image: asset-url("background.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  min-height: 100vh;
+  margin: 0;
+}
