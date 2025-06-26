@@ -6,10 +6,18 @@ body {
   color:white;
 }
 .with-background {
-  background-image: asset-url("background.jpg");
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), asset-url("background.jpg");
   background-size: cover;
-  background-repeat: no-repeat;
+  // background-repeat: no-repeat;
   background-position: center;
   min-height: 100vh;
   margin: 0;
+  opacity: 0;
+  animation: bgFadeIn 2s ease-in-out forwards;
+}
+
+@keyframes bgFadeIn {
+  to {
+    opacity: 1;
+  }
 }
