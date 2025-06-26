@@ -1,14 +1,31 @@
-<h1><%= @cocktail.name %></h1>
-
-<h2>Ingredients:</h2>
-<ul>
-  <% @doses.each do |dose| %>
-    <li>
-      <%= dose.description %> of <%= dose.ingredient.name %>
-      <%= link_to "Remove", cocktail_dose_path(@cocktail, dose), data: { turbo_confirm: "Are you sure?", turbo_method: :delete } %>
-    </li>
-  <% end %>
-</ul>
-
-<%= link_to "Add Ingredient", new_cocktail_dose_path(@cocktail) %><br>
-<%= link_to "Back", cocktails_path %>
+<div class="row pt-3">
+  <div class="col-12 col-md-6">
+    <% if @cocktail.photo.attached? %>
+      <%= image_tag url_for(@cocktail.photo), alt: @cocktail.name, class: "cocktail-photo" %>
+    <% else %>
+      <p>No photo available.</p>
+    <% end %>
+  </div>
+  <div class="col-12 col-md-6">
+    <div class="d-flex align-items-center gap-3">
+      <h1 class="me-auto"><%= @cocktail.name %></h1>
+      <%= link_to edit_cocktail_path(@cocktail), class: "btn btn-outline-secondary", title: "Edit" do %>
+        <i class="fas fa-edit"></i>
+      <% end %>
+      <%= link_to @cocktail, data: { turbo_confirm: "Are you sure?", turbo_method: :delete }, class: "btn btn-outline-danger", title: "Delete" do %>
+        <i class="fas fa-trash-alt"></i>
+      <% end %>
+    </div>
+    <h2>Ingredients:</h2>
+    <ul>
+      <% @doses.each do |dose| %>
+        <li>
+          <%= dose.description %> of <%= dose.ingredient.name %>
+          <%= link_to "Remove", cocktail_dose_path(@cocktail, dose), data: { turbo_confirm: "Are you sure?", turbo_method: :delete } %>
+        </li>
+      <% end %>
+    </ul>
+    <%= link_to "Add Ingredient", new_cocktail_dose_path(@cocktail) %><br>
+    <%= link_to "Back to list", cocktails_path %>
+  </div>
+</div>
