@@ -9,10 +9,30 @@
   <div class="col-12 col-md-6">
     <div class="d-flex align-items-center gap-3">
       <h1 class="me-auto"><%= @cocktail.name %></h1>
-      <%= link_to edit_cocktail_path(@cocktail), class: "btn btn-outline-secondary", title: "Edit" do %>
-        <i class="fas fa-edit"></i>
-      <% end %>
-      <%= link_to @cocktail, data: { turbo_confirm: "Are you sure?", turbo_method: :delete }, class: "btn btn-outline-danger", title: "Delete" do %>
+      <div data-controller="toggle">
+        <!-- Edit Button -->
+        <button data-action="click->toggle#toggle" class="btn btn-outline-primary">
+          <i class="fas fa-edit"></i> Edit
+        </button>
+        <!-- Popup Edit Form -->
+        <div class="edit-popup d-none" data-toggle-target="popup">
+          <div class="edit-popup-content position-relative">
+            <!-- Cancel button at top-right -->
+            <button
+              type="button"
+              class="btn btn-link position-absolute top-0 end-0 m-0 text-white text-decoration-none"
+              data-action="click->toggle#toggle"
+              aria-label="Cancel">✕
+            </button>
+            <h2>Edit <%= @cocktail.name %></h2>
+            <%= render "cocktails/form", cocktail: @cocktail %>
+          </div>
+        </div>
+      </div>
+      <%= link_to @cocktail,
+        data: { turbo_confirm: "Are you sure?", turbo_method: :delete },
+        class: "btn btn-outline-danger",
+        title: "Delete" do %>
         <i class="fas fa-trash-alt"></i>
       <% end %>
     </div>
@@ -21,7 +41,6 @@
       <% @doses.each do |dose| %>
         <li>
           <%= dose.description %> of <%= dose.ingredient.name %>
-          <%= link_to "Remove", cocktail_dose_path(@cocktail, dose), data: { turbo_confirm: "Are you sure?", turbo_method: :delete } %>
         </li>
       <% end %>
     </ul>
