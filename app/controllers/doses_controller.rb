@@ -3,12 +3,14 @@ class DosesController < ApplicationController
 
   def new
     @dose = Dose.new
+    @cocktail = Cocktail.find(params[:cocktail_id])
+    @doses = Dose.all
   end
 
   def create
     @dose = @cocktail.doses.build(dose_params)
     if @dose.save
-      redirect_to @cocktail, notice: "Ingredient added!"
+      redirect_to new_cocktail_dose_path(@cocktail, @dose), notice: "Ingredient added!"
     else
       render :new, status: :unprocessable_entity
     end
@@ -17,7 +19,7 @@ class DosesController < ApplicationController
   def destroy
     @dose = Dose.find(params[:id])
     @dose.destroy
-    redirect_to @cocktail, notice: "Ingredient removed."
+    redirect_to new_cocktail_dose_path(@cocktail, @dose), notice: "Ingredient removed."
   end
 
   private
