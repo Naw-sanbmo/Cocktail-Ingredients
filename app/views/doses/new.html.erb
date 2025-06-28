@@ -10,7 +10,7 @@
       <% @doses.each do |dose| %>
         <li>
           <%= dose.description %> of <%= dose.ingredient.name %>
-          <%= link_to "Remove", cocktail_dose_path(@cocktail, dose), data: { turbo_confirm: "Are you sure?", turbo_method: :delete } %>
+          <%= link_to "Remove", new_cocktail_dose_path(@cocktail), data: { turbo_confirm: "Are you sure?", turbo_method: :delete } %>
         </li>
       <% end %>
     </ul>
@@ -18,11 +18,11 @@
 
     <%= simple_form_for [@cocktail, @dose] do |f| %>
       <%= f.input :ingredient_id,
-                  collection: Ingredient.all,
+                  collection: Ingredient.where.not(id: @cocktail.ingredients.pluck(:id)),
                   label: "Choose Ingredient",
                   prompt: "Select one" %>
       <%= f.input :description %>
-      <%= f.button :submit, "Add Dose", class: "btn btn-primary w-100" %>
+      <%= f.button :submit, "Add Ingredient", class: "btn btn-primary w-100" %>
     <% end %>
 
     <div class="text-center mt-3">

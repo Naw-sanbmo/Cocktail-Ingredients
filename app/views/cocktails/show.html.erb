@@ -48,3 +48,11 @@
     <%= link_to "Back to list", cocktails_path %>
   </div>
 </div>
+<h3>Reviews</h3>
+<% @cocktail.reviews.each do |review| %>
+  <p><strong>Rating:</strong> <%= review.rating %>/5</p>
+  <p><%= review.content %></p>
+  <hr>
+<% end %>
+
+<%= link_to "Write a Review", new_cocktail_review_path(@cocktail), class: "btn btn-outline-secondary" %>
