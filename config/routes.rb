@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'review/new'
+  get 'review/create'
   get 'cocktails/index'
   get 'cocktails/show'
   get 'cocktails/new'
@@ -14,5 +16,6 @@ Rails.application.routes.draw do
   # root "posts#index"
   resources :cocktails do
     resources :doses, only: %i[new create edit update destroy]
+    resources :reviews, only: %i[new create destroy]
   end
 end

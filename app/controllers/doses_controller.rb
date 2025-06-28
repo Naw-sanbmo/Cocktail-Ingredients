@@ -3,15 +3,15 @@ class DosesController < ApplicationController
 
   def new
     @dose = Dose.new
-    @cocktail = Cocktail.find(params[:cocktail_id])
-    @doses = Dose.all
+    @doses = @cocktail.doses
   end
 
   def create
     @dose = @cocktail.doses.build(dose_params)
     if @dose.save
-      redirect_to new_cocktail_dose_path(@cocktail, @dose), notice: "Ingredient added!"
+      redirect_to new_cocktail_dose_path(@cocktail), notice: "Ingredient added!"
     else
+      @doses = @cocktail.doses
       render :new, status: :unprocessable_entity
     end
   end
