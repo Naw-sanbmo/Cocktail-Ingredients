@@ -50,7 +50,7 @@
 </div>
 <h3>Reviews</h3>
 <% @cocktail.reviews.each do |review| %>
-  <p><strong>Rating:</strong> <%= review.rating %>/5</p>
+  <p><strong>Rating:</strong> <%= "⭐️" * review.rating + "☆" * (5 - review.rating) %></p>
   <p><%= review.content %></p>
   <hr>
 <% end %>

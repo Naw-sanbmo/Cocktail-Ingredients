@@ -4,8 +4,20 @@
 <div class="cards">
   <% @cocktails.each do |cocktail| %>
     <%= link_to cocktail_path(cocktail), class: "text-decoration-none" do %>
-      <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= url_for(cocktail.photo) if cocktail.photo.attached? %>')">
-        <%= cocktail.name %>
+      <div class="card-category position-relative" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= url_for(cocktail.photo) if cocktail.photo.attached? %>'); height: 200px;">
+        <strong><%= cocktail.name %></strong>
+        <div class="position-absolute bottom-0 start-0 p-2 w-100 d-flex justify-content-end align-items-end" style="background: rgba(0, 0, 0, 0.4); color: white;">
+          <% average_rating = cocktail.reviews.average(:rating)&.round || 0 %>
+          <div class="text-warning" style="font-size: 12px;">
+            <% 5.times do |i| %>
+              <% if i < average_rating %>
+                <i class="fas fa-star"></i>
+              <% else %>
+                <i class="far fa-star"></i>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
       </div>
     <% end %>
   <% end %>
