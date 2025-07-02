@@ -50,9 +50,12 @@
 </div>
 <h3>Reviews</h3>
 <% @cocktail.reviews.each do |review| %>
-  <p><strong>Rating:</strong> <%= "⭐️" * review.rating + "☆" * (5 - review.rating) %></p>
+  <p><strong>Rating:</strong>
+    <span style="font-size: 12px;">
+      <%= "⭐️" * review.rating + "☆" * (5 - review.rating) %>
+    </span>
+  </p>
   <p><%= review.content %></p>
   <hr>
 <% end %>
-
-<%= link_to "Write a Review", new_cocktail_review_path(@cocktail), class: "btn btn-outline-secondary" %>
+<%= link_to "Write a Review", new_cocktail_review_path(@cocktail), class: "btn btn-outline-secondary mb-3" %>
