@@ -1,7 +1,9 @@
-<div class="d-flex justify-content-center mt-2">
+<div class="d-flex flex-column align-items-center mt-2">
+  <h2>WELCOME TO COCKTAILS PARADISE</h2>
+  <%= link_to "Create New Cocktail", new_cocktail_path, class: "btn btn-outline-secondary text-decoration-none text-white" %>
   <h1>All Cocktails</h1>
 </div>
-<div class="cards">
+<div class="cards mb-3">
   <% @cocktails.each do |cocktail| %>
     <%= link_to cocktail_path(cocktail), class: "text-decoration-none" do %>
       <div class="card-category position-relative" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= url_for(cocktail.photo) if cocktail.photo.attached? %>'); height: 200px;">
